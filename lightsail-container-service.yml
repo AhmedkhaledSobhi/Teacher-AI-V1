@@ -1,0 +1,26 @@
+# AWS Lightsail Container Service Configuration
+# This file defines the container service for production deployment
+# NOTE: AWS Lightsail Container Service only supports single-container deployments
+
+version: 1
+services:
+  # Next.js Application Service (Single Container)
+  ai-teacher-frontend-app:
+    image: ai-teacher-frontend-app:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}  # Points to external database (AWS RDS or external service)
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+      - BACKEND_URL=${BACKEND_URL}
+      - API_URL=${API_URL}
+    # Health check removed - AWS Lightsail will use HTTP health check instead
+    # Lightsail automatically checks the public endpoint: https://your-service.com/api/health
+    # No need for internal curl command in distroless container
+    restart: unless-stopped
+
+# NOTE: Database must be external (AWS RDS, external PostgreSQL service, or separate Lightsail instance)
+# Docker Compose is only used for local development with multiple containers

@@ -1,0 +1,67 @@
+version: "3.8"
+name: ai-teacher-frontend
+
+services:
+  # PostgreSQL Database Container - Lightweight Alpine
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai-teacher-db
+    environment:
+      POSTGRES_DB: ai_teacher
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d ai_teacher" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Resource limits for lighter container
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # Next.js Application Container - Lightweight (Development)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: ai-teacher-app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://admin:admin1234@postgres:5432/ai_teacher"
+      NEXTAUTH_URL: "http://localhost:3000"
+      NEXTAUTH_SECRET: "MTNvexhXZuFuHMT8KEqw5yOkNBiysDnsDOLSiNt4GZM="
+      NODE_ENV: "development"
+      NEXT_PUBLIC_BACKEND_URL: "https://drsi.ai"
+      BACKEND_URL: "https://drsi.ai"
+      API_URL: "http://localhost:3000/api"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    # Resource limits for development container
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    # Development-specific settings
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+
+volumes:
+  postgres_data:
+    driver: local

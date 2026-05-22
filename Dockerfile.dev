@@ -1,0 +1,26 @@
+# Development Dockerfile for migrations and development
+FROM node:20-alpine AS base
+
+# Install dependencies
+RUN apk add --no-cache libc6-compat openssl
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+# Copy necessary files for postinstall scripts
+COPY src/prisma/schema.prisma ./src/prisma/schema.prisma
+COPY src/assets/iconify-icons/bundle-icons-css.ts ./src/assets/iconify-icons/bundle-icons-css.ts
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Expose port
+EXPOSE 3000
+
+# Default command
+CMD ["npm", "run", "dev"]

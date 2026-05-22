@@ -1,0 +1,57 @@
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  pointer-events: none;
+
+  .navbar {
+    padding-block: 0.75rem;
+    padding-inline: 1.5rem;
+    margin-inline: auto;
+    pointer-events: auto;
+    background-color: transparent;
+
+    &.headerScrolled {
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    @media (min-width: 600px) {
+      padding-inline: 2rem;
+    }
+    @media (min-width: 900px) {
+      max-inline-size: calc(900px - 48px);
+    }
+    @media (min-width: 1200px) {
+      max-inline-size: calc(1200px - 48px);
+    }
+    @media (min-width: 1920px) {
+      max-inline-size: calc(1440px - 48px);
+    }
+
+    .navbarContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+  }
+}
+
+.inputBorder {
+  fieldset {
+    border-color: rgb(var(--mui-mainColorChannels-dark) / 0.22) !important;
+  }
+  label,
+  input {
+    color: rgb(var(--mui-mainColorChannels-dark) / 0.9) !important;
+  }
+}
+
+.footerRadius {
+  border-start-start-radius: 3.75rem;
+  border-start-end-radius: 3.75rem;
+}

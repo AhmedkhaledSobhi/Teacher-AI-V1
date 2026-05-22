@@ -1,0 +1,27 @@
+// This is an update to the Prisma schema to support chat functionality
+// Add these models to your existing schema.prisma file
+
+model Thread {
+  id         String    @id
+  grade_id   Int
+  subject    String
+  term_id    Int
+  user_id    String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  
+  // Relations
+  user       User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  messages   Message[]
+}
+
+model Message {
+  id         String   @id
+  thread_id  String
+  content    String
+  role       String   // 'user' or 'assistant'
+  created_at DateTime @default(now())
+  
+  // Relations
+  thread     Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+}

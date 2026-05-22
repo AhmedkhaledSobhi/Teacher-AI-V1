@@ -1,0 +1,54 @@
+{
+  "urls": [
+    "auth-sprite.webm",
+    "auth-sprite.m4a",
+    "auth-sprite.mp3"
+  ],
+  "sprite": {
+    "silence": [
+      0,
+      50,
+      true
+    ],
+    "auth-error-msg": [
+      550,
+      1108.7528344671202
+    ],
+    "btn-primary-launch": [
+      3050,
+      2998.140589569161
+    ],
+    "btn-register-launch": [
+      6550,
+      1688.8435374149653
+    ],
+    "btn-secondary-action": [
+      9049.999999999998,
+      2000
+    ],
+    "ui-checkbox-check": [
+      11549.999999999998,
+      500
+    ],
+    "ui-dropdown-open": [
+      13049.999999999998,
+      509.9999999999998
+    ],
+    "ui-eye-toggle": [
+      14549.999999999998,
+      1137.777777777778
+    ],
+    "ui-link-auth-switch": [
+      17050,
+      124.98866213151771
+    ],
+    "ui-link-forget-pass": [
+      18550,
+      199.47845804988518
+    ],
+    "ui-theme-toggle": [
+      20050,
+      2475.2607709750587
+    ]
+  }
+}

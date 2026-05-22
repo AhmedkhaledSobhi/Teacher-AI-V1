@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Test 401 Redirect</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        margin: 10px 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      button.danger {
+        background: #dc3545;
+      }
+      button.danger:hover {
+        background: #c82333;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 4px;
+        display: none;
+      }
+      .result.success {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+      .result.error {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+      .result.info {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔒 Test 401 Redirect</h1>
+      <p>Use this page to test if 401 responses properly redirect to login.</p>
+
+      <div>
+        <button
+          class="danger"
+          onclick="test401WithFetch()"
+        >
+          Test 401 with Fetch (Raw)
+        </button>
+        <button
+          class="danger"
+          onclick="test401WithAPI()"
+        >
+          Test 401 with API Utility (Should Redirect)
+        </button>
+        <button onclick="checkCurrentURL()">Check Current URL</button>
+      </div>
+
+      <div
+        id="result"
+        class="result"
+      ></div>
+
+      <div
+        style="
+          margin-top: 30px;
+          padding: 15px;
+          background: #e7f3ff;
+          border-radius: 4px;
+        "
+      >
+        <h3>Instructions:</h3>
+        <ol>
+          <li>
+            Click "Test 401 with API Utility" - This should redirect you to
+            login
+          </li>
+          <li>Check the browser console (F12) for logs</li>
+          <li>Check the Network tab to see the 401 response</li>
+          <li>Verify you're redirected to the login page</li>
+        </ol>
+      </div>
+    </div>
+
+    <script>
+      function showResult(message, type = "info") {
+        const resultDiv = document.getElementById("result");
+        resultDiv.className = `result ${type}`;
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = message;
+      }
+
+      async function test401WithFetch() {
+        showResult("Testing 401 with raw fetch...", "info");
+        try {
+          const response = await fetch("/api/test/401");
+          const data = await response.json();
+          showResult(
+            `Status: ${response.status}<br>` +
+              `Response: <code>${JSON.stringify(data, null, 2)}</code>`,
+            response.status === 401 ? "error" : "success"
+          );
+        } catch (error) {
+          showResult(`Error: ${error.message}`, "error");
+        }
+      }
+
+      async function test401WithAPI() {
+        showResult("Testing 401 with API utility (should redirect)...", "info");
+
+        // Note: This requires the API utility to be available
+        // In a real Next.js app, you'd import it like:
+        // import api from '@/utils/api'
+
+        // For this HTML test, we'll simulate it
+        try {
+          const response = await fetch("/api/test/401");
+
+          if (response.status === 401) {
+            showResult(
+              "✅ 401 detected! If using API utility, you should be redirected to login now.<br>" +
+                "Check the browser console and network tab for details.",
+              "info"
+            );
+
+            // Simulate what the API utility would do
+            console.warn("Authentication failed: Unauthorized");
+
+            // In a real app, this would be handled by auth-redirect.ts
+            // For testing, you can manually redirect:
+            // window.location.href = '/ar/pages/auth/login-v2';
+          } else {
+            showResult(`Unexpected status: ${response.status}`, "error");
+          }
+        } catch (error) {
+          showResult(`Error: ${error.message}`, "error");
+        }
+      }
+
+      function checkCurrentURL() {
+        showResult(
+          `Current URL: <code>${window.location.href}</code><br>` +
+            `Path: <code>${window.location.pathname}</code>`,
+          "info"
+        );
+      }
+
+      // Log initial state
+    </script>
+  </body>
+</html>
