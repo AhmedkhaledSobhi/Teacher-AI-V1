@@ -53,6 +53,12 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/apps/statistics/page.js"
+    ],
+    "/[lang]/[...not-found]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/[...not-found]/page.css",
+      "static/chunks/app/[lang]/[...not-found]/page.js"
     ]
   }
 }
