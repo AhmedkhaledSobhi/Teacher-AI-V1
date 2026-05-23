@@ -12,10 +12,10 @@
       "static/css/app/[lang]/(dashboard)/(private)/layout.css",
       "static/chunks/app/[lang]/(dashboard)/(private)/layout.js"
     ],
-    "/[lang]/(dashboard)/(private)/apps/quiz/page": [
+    "/[lang]/(dashboard)/(private)/apps/journey/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/quiz/page.js"
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/journey/page.js"
     ],
     "/api/auth/[...nextauth]/route": [
       "static/chunks/webpack.js",
