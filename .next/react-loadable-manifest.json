@@ -20,5 +20,19 @@
   "utils\\chat-api.ts -> next-auth/react": {
     "id": "utils\\chat-api.ts -> next-auth/react",
     "files": []
+  },
+  "views\\apps\\chat\\ChatLog.tsx -> react-toastify": {
+    "id": "views\\apps\\chat\\ChatLog.tsx -> react-toastify",
+    "files": []
+  },
+  "views\\apps\\chat\\SendMsgForm.tsx -> ./VoiceRecording": {
+    "id": "views\\apps\\chat\\SendMsgForm.tsx -> ./VoiceRecording",
+    "files": [
+      "static/chunks/_app-pages-browser_src_views_apps_chat_VoiceRecording_tsx.js"
+    ]
+  },
+  "views\\apps\\chat\\SidebarLeft.tsx -> next-auth/react": {
+    "id": "views\\apps\\chat\\SidebarLeft.tsx -> next-auth/react",
+    "files": []
   }
 }

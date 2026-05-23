@@ -1,5 +1,9 @@
 {
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/[lang]/(dashboard)/(private)/apps/journey/page": "app/[lang]/(dashboard)/(private)/apps/journey/page.js"
+  "/[lang]/(dashboard)/(private)/apps/quiz/page": "app/[lang]/(dashboard)/(private)/apps/quiz/page.js",
+  "/[lang]/(dashboard)/(private)/apps/home/page": "app/[lang]/(dashboard)/(private)/apps/home/page.js",
+  "/[lang]/(dashboard)/(private)/apps/statistics/page": "app/[lang]/(dashboard)/(private)/apps/statistics/page.js",
+  "/[lang]/(dashboard)/(private)/apps/settings/page": "app/[lang]/(dashboard)/(private)/apps/settings/page.js",
+  "/[lang]/(dashboard)/(private)/apps/journey/page": "app/[lang]/(dashboard)/(private)/apps/journey/page.js",
+  "/[lang]/(dashboard)/(private)/apps/chat/page": "app/[lang]/(dashboard)/(private)/apps/chat/page.js"
 }
